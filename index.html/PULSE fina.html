@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pulse</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f2ea;--card:#ffffff;--card2:#f0ebe1;--tx:#2b2f36;--mut:#7d8089;--lime:#6f9d82;--cy:#5f8fc4;--gr:#6f9d82;--rd:#d98c7a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#ece6da;font-family:'DM Sans',system-ui,sans-serif;color:var(--tx)}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+#app{box-shadow:0 0 60px #4a3f2a22;max-width:420px;height:100%;margin:0 auto;background:linear-gradient(180deg,#fbf9f4,var(--bg));display:flex;flex-direction:column;position:relative;overflow:hidden}
+#view{flex:1;overflow-y:auto;padding:0 16px 24px}
+.top{display:flex;align-items:center;gap:8px;padding:14px 0}
+.logo{width:34px;height:34px;border-radius:10px;background:var(--card);display:grid;place-items:center;color:var(--lime)}
+.brand{font-weight:700;font-size:18px;letter-spacing:.04em}
+.chip{background:var(--card2);border-radius:99px;padding:6px 10px;font-size:11px;font-weight:700;letter-spacing:.05em}
+.chip i{display:inline-block;width:6px;height:6px;border-radius:9px;background:var(--lime);margin-right:5px}
+.sp{flex:1}
+.av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;color:#2b2f36;flex:none}
+h1{font-size:30px;line-height:1.05;font-weight:700;margin:6px 0 8px}
+.lime{color:var(--lime)}.mut{color:var(--mut)}.sm{font-size:12px}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--mut);text-transform:uppercase;margin:20px 0 10px;display:flex;justify-content:space-between}
+.card{background:var(--card);border-radius:20px;box-shadow:0 1px 2px #0000000a,0 8px 22px #4a3f2a0f;padding:14px;margin-bottom:10px;border:1px solid #0000000d}
+.row{display:flex;align-items:center;gap:12px}
+.ico{width:42px;height:42px;border-radius:12px;background:var(--card2);display:grid;place-items:center;font-size:18px;flex:none}
+.dev{width:100%;text-align:left;margin-bottom:10px;opacity:.85}
+.dev.on{background:linear-gradient(135deg,#e4eee7,#fff);opacity:1;border-color:#6f9d8255}
+.plus{margin-left:auto;width:28px;height:28px;border-radius:50%;background:var(--card2);display:grid;place-items:center;color:var(--mut)}
+.on .plus{background:var(--lime);color:#fff;font-weight:700}
+.pill{padding:10px 16px;border-radius:99px;background:var(--card2);font-weight:500;font-size:14px}
+.pill.on{background:var(--lime);color:#fff;font-weight:700}
+.cta{width:100%;padding:17px;border-radius:14px;background:var(--lime);color:#fff;font-weight:700;font-size:16px;box-shadow:0 6px 18px #6f9d8238}
+.cta.g{background:var(--gr);box-shadow:0 6px 18px #6f9d8238}
+.cta:disabled{opacity:.4;box-shadow:none}
+.inp{display:flex;gap:8px;align-items:center;background:var(--card);border-radius:12px;padding:8px 8px 8px 14px;border:1px solid #00000014}
+.inp input{flex:1;background:none;border:0;color:var(--tx);font:inherit;font-weight:700;outline:0;text-transform:uppercase;min-width:0}
+.sm-btn{background:var(--lime);color:#fff;font-weight:700;padding:9px 16px;border-radius:10px}
+.seg{display:flex;background:var(--card);border-radius:14px;padding:4px;margin:6px 0 14px}
+.seg button{flex:1;padding:12px 4px;border-radius:11px;font-weight:700;font-size:13px;color:var(--mut)}
+.seg button.on{background:var(--lime);color:#fff}
+.ring{width:190px;height:190px;margin:0 auto;position:relative;display:grid;place-items:center}
+.ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.big{font-size:54px;font-weight:700;line-height:1}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:var(--card2);border-radius:14px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+.lrow{border-radius:18px;box-shadow:0 1px 2px #0000000a,0 6px 16px #4a3f2a0d;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:var(--card);margin-bottom:8px;width:100%;text-align:left}
+.lrow.me{border:1px solid var(--lime);background:#6f9d8212}
+.rk{width:26px;font-size:22px;font-weight:700;color:var(--mut);text-align:center}
+.me .rk{color:var(--lime)}
+.tag{font-size:10px;background:var(--card2);padding:3px 8px;border-radius:99px;color:var(--mut);white-space:nowrap}
+.val{margin-left:auto;text-align:right;font-weight:700;font-size:20px;color:var(--lime)}
+.val small{display:block;font-size:10px;color:var(--mut);font-weight:500}
+.check{width:26px;height:26px;border-radius:7px;background:var(--card2);display:grid;place-items:center;margin-left:auto;color:#fff;font-weight:700;flex:none}
+.check.on{background:var(--lime)}
+.bar{height:10px;border-radius:9px;background:#e6e1d6;overflow:hidden;display:flex}
+.bar b{display:block;background:var(--gr);height:100%}
+.code{font-size:42px;font-weight:700;color:var(--lime);letter-spacing:.06em}
+nav{display:flex;border-top:1px solid #00000014;background:#faf7f1ee;padding:10px 0 12px}
+nav button{flex:1;font-size:11px;font-weight:700;color:var(--mut);display:flex;flex-direction:column;gap:3px;align-items:center}
+nav button span{font-size:18px}nav button.on{color:var(--lime)}
+.emo button{width:44px;height:40px;border-radius:12px;background:var(--card2);font-size:18px;margin-right:6px}
+.mini{display:flex;gap:6px;align-items:flex-end;height:44px;margin-top:10px}
+.mini i{flex:1;background:var(--lime);border-radius:3px}
+#toast{position:absolute;left:50%;bottom:90px;transform:translateX(-50%);background:var(--lime);color:#fff;padding:10px 16px;border-radius:99px;font-weight:700;font-size:13px;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1}
+button:focus-visible,input:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+</style></head><body><div id="app"><div id="view"></div><nav id="nav"></nav><div id="toast"></div></div>
+<script>
+/* ---------- MOCK DATA LAYER (swap adapters for real APIs later) ---------- */
+const Providers={
+  whoop:{name:'WHOOP 4.0',sub:'Connected · Krishna’s Strap 4.0',icon:'〰',async connect(){return{ok:true}},async fetchDay(u){return u.d}},
+  apple:{name:'Apple Watch',sub:'Tap to pair HealthKit',icon:'⌚',async connect(){return{ok:true}},async fetchDay(u){return u.d}},
+  garmin:{name:'Garmin',sub:'Connect Garmin Connect™',icon:'△',async connect(){return{ok:true}},async fetchDay(u){return u.d}},
+  oura:{name:'Oura',sub:'Connect Oura Ring Gen3',icon:'◉',async connect(){return{ok:true}},async fetchDay(u){return u.d}},
+  fitbit:{name:'Fitbit',sub:'Connect Google Fitbit',icon:'▤',async connect(){return{ok:true}},async fetchDay(u){return u.d}}
+};
+const U=(id,n,dev,prov,c,d)=>({id,n,dev,prov,c,d});
+const USERS={
+ dad:U('dad','Dad','Apple Watch Ultra','apple','#e9c9a3',{steps:18420}),
+ me:U('me','Krishna','WHOOP 4.0','whoop','#6f9d82',{steps:16810}),
+ arjun:U('arjun','Arjun','Garmin Forerunner','garmin','#a9cbe6',{steps:15240}),
+ riya:U('riya','Riya','Fitbit Charge 6','fitbit','#eab4c7',{steps:14200}),
+ kabir:U('kabir','Kabir','Oura Ring 3','oura','#c5b7e6',{steps:11850}),
+ mom:U('mom','Mom','Apple Watch S9','apple','#b5dcc3',{steps:9640}),
+ rohan:U('rohan','Rohan Mehta','Garmin Forerunner 965','garmin','#a9cbe6',{}),
+ sid:U('sid','Siddharth Rao','Apple Watch Ultra 2','apple','#e9c9a3',{}),
+ dhruv:U('dhruv','Dhruv Kapoor','COROS Pace 3','garmin','#d0d0d0',{}),
+ tanmay:U('tanmay','Tanmay Joshi','Garmin Epix Pro','garmin','#a9cbe6',{}),
+ armaan:U('armaan','Armaan Varma','Apple Watch S9','apple','#b5dcc3',{}),
+ ananya:U('ananya','Ananya Sen','Oura Ring Gen 3','oura','#c5b7e6',{}),
+ vikram:U('vikram','Vikram Malhotra','Apple Watch Series 9','apple','#e9c9a3',{}),
+ priya:U('priya','Priya Nair','Fitbit Sense 2','fitbit','#eab4c7',{}),
+ sahil:U('sahil','Sahil Shah','WHOOP 4.0','whoop','#6f9d82',{}),
+ neha:U('neha','Neha Kulkarni','Garmin Venu 3','garmin','#a9cbe6',{})
+};
+const LEAGUES={
+ AFD720:{id:'AFD720',color:'#6f9d82',name:'Arora Family',circle:'Family Circle',metrics:['Steps'],unit:'STEPS',
+   scores:{dad:18420,me:16810,arjun:15240,riya:14200,kabir:11850,mom:9640},size:6},
+ ASH441:{id:'ASH441',color:'#5f8fc4',name:'Ashoka Lads',circle:'Friends Circle',metrics:['Workout Intensity','Running'],unit:'PTS',
+   scores:{rohan:98.4,me:92.6,sid:87.1,dhruv:81.5,tanmay:74.8,armaan:69.2},size:10,
+   sub:{rohan:'14.2 km · 58m Z4',me:'10.5 km · 72m Z3-5',sid:'8.8 km · 64m Z4',dhruv:'11.0 km · 42m Z3',tanmay:'6.5 km · 50m Z4',armaan:'5.2 km · 45m Z2-3'}},
+ MOS882:{id:'MOS882',color:'#e3a98a',name:'Mosaic Wellness',circle:'Work Circle',metrics:['Consistency','Sleep'],unit:'PTS',
+   scores:{ananya:96.8,me:91.2,vikram:88.5,priya:84.0,sahil:79.4,neha:72.0},size:24}
+};
+const Data={
+  async leaderboard(id,period){
+    const L=LEAGUES[id],pts=L.unit==='PTS';
+    const rows=Object.entries(L.scores).map(([uid,v],i)=>{
+      const w=pts?Math.min(99.5,Math.max(55,v+[-2.4,1.9,-3.1,2.6,1.2,-1.7][i%6])):Math.round(v*[6.4,6.9,6.1,6.6,7.0,6.3][i%6]);
+      return{u:USERS[uid],v:period==='weekly'?(pts?+w.toFixed(1):w):v,sub:L.sub&&L.sub[uid]};
+    }).sort((a,b)=>b.v-a.v);
+    return rows;
+  }
+};
+/* ---------- STATE ---------- */
+const S={screen:'landing',lv:'list',paired:'whoop',tab:'join',code:'AFD720',joined:false,league:'AFD720',period:'daily',
+  cl:{name:'Weekend Warriors',circle:'Custom',m:{Steps:1,Sleep:0,Workout:0,Running:0,Consistency:0},code:'EFX908'},
+  incoming:{n:'Vikram Malhotra',from:'Ashoka Lads',ch:'24-Hour Step Sprint',stake:'Loser buys morning cold brew'},
+  rec:{w:8,l:2},
+  active:[{t:'7-Day Running Miles Duel',ends:'Ends in 14h 22m',me:28.4,op:26.3,u:'km',opn:'Rohan M.',opd:'Garmin 965',opc:'#a9cbe6',emo:true},
+          {t:'Sleep Duel',ends:'Ends Sunday 09:00AM',me:88,op:91,u:'%',opn:'Ananya S.',opd:'Oura Gen 3',opc:'#c5b7e6'}],
+  bo:{opp:'sid',metric:'Running Miles',dur:'3 Days',stake:'Loser buys post-run smoothies'}};
+const $=s=>document.querySelector(s),view=$('#view');
+const av=(u,sz)=>`<div class="av" style="background:${u.c};${sz?`width:${sz}px;height:${sz}px`:''}">${u.n[0]}</div>`;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),1800)}
+const hdr=(back)=>`<div class="top">${back?`<button data-a="go" data-v="${back}" aria-label="Back">←</button>`:''}<div class="logo">∿</div><div class="brand">${back?'SIGN UP':'PULSE'}</div><div class="sp"></div>${av(USERS.me)}</div>`;
+const myLeagues=()=>Object.values(LEAGUES).filter(l=>l.scores.me!==undefined);
+const rankOf=async l=>{const r=await Data.leaderboard(l.id,'daily');return r.findIndex(x=>x.u.id==='me')+1};
+/* ---------- SCREENS ---------- */
+function landing(){
+  const c=(i,t,sub,d)=>`<div class="card"><div class="row"><div class="ico" style="color:var(--lime)">${i}</div><div><b style="font-size:18px">${t}</b><div class="lime sm" style="font-weight:700">${sub}</div></div></div><p class="mut" style="font-size:14px;margin-top:10px">${d}</p></div>`;
+  return `<div class="top" style="justify-content:center"><div class="logo" style="width:40px;height:40px;border-radius:12px;background:#fff;box-shadow:0 1px 2px #0000000a,0 6px 16px #4a3f2a14"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6f9d82" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 15C7 5 10 5 12 12S17 19 20 9"/></svg></div><div class="brand">PULSE</div></div>
+  <h1 style="text-transform:none;font-size:32px">Everyone tracks their health.<br><span class="lime">Nobody tracks it together.</span></h1>
+  <p class="mut" style="font-size:14px">Your WHOOP. Your dad’s Apple Watch. Your friend’s Garmin. One leaderboard.</p>
+  <div class="lbl" style="margin-top:28px"><span>How Pulse works</span></div>
+  ${c('⊕','Create','Make your own leagues','Family, college buddies or workplace leagues.')}${c('▥','Compete','Choose what matters to your circle','Steps, sleep score, workout intensity.')}${c('✕','Challenge','Go 1v1','Head-to-head duels, quick showdowns.')}
+  <div class="card" style="background:#e8efe9;text-align:center;padding:22px 14px;margin-top:18px"><b style="font-size:19px">Wearables made health personal.<br><span class="lime">PULSE makes it social.</span></b></div>
+  <div class="card" style="text-align:center"><div class="sm mut" style="font-size:10px;letter-spacing:.1em;margin-bottom:10px">DEVICE SYNC SUPPORTED</div><div class="row" style="flex-wrap:wrap;justify-content:center;gap:8px">${Object.values(Providers).map(p=>`<span class="chip" style="font-weight:500;font-size:13px">${p.icon} ${p.name.replace(' 4.0','')}</span>`).join('')}</div></div>
+  <div class="card" style="text-align:center;padding:22px 16px"><b style="font-size:21px">Ready to enter the arena?</b><button class="cta" style="margin-top:16px;text-transform:none;font-size:17px" data-a="go" data-v="onboard">Get Started →</button></div>`;
+}
+function onboard(){
+  const devs=Object.entries(Providers).map(([k,p])=>`<button class="card row dev ${S.paired===k?'on':''}" data-a="pair" data-v="${k}"><div class="ico">${p.icon}</div><div><b style="font-size:18px">${p.name}</b><div class="sm ${S.paired===k?'lime':'mut'}">${S.paired===k?'Connected · Krishna’s '+p.name:p.sub}</div></div><span class="plus">${S.paired===k?'✓':'+'}</span></button>`).join('');
+  const l=LEAGUES[S.code.toUpperCase()];
+  return hdr('landing')+`<div class="lbl" style="margin-top:4px"><span>Step 1 · Link device</span><span class="lime">◉ 1 Paired</span></div>${devs}
+  <div class="lbl"><span>Step 2 · Find your league</span></div>
+  <div class="row" style="margin-bottom:12px"><button class="pill ${S.tab==='join'?'on':''}" data-a="tab" data-v="join">Input League Code ${S.tab==='join'?'✓':''}</button><button class="pill ${S.tab==='create'?'on':''}" data-a="go" data-v="create">⊕ Create League</button></div>
+  <div class="inp"><span class="mut">123</span><input id="code" value="${S.code}" maxlength="6" aria-label="League code"><button class="sm-btn" data-a="join">Join</button></div>
+  ${S.joined&&l?`<div class="card" style="margin-top:18px;background:linear-gradient(135deg,var(--card),#e6eef6)"><span class="tag lime">● ACTIVE LEAGUE</span> <span class="sm mut">CODE: ${l.id}</span><div style="font-size:26px;font-weight:700;margin:14px 0 4px">${l.name} League</div><div class="sm mut">${Object.keys(l.scores).length} Active Athletes Ready</div></div>`:''}
+  <button class="cta" style="margin-top:20px" data-a="enter" ${S.joined?'':'disabled'}>Let’s begin! →</button><p class="sm mut" style="text-align:center;margin-top:12px">🔒 End-to-end encrypted biological data sync</p>`;
+}
+function create(){
+  const c=S.cl,M=[['Steps','👣','Steps','Daily step volume','POPULAR WITH FAMILIES'],['Sleep','☾','Sleep levels','Sleep duration and consistency'],['Workout','◔','Workout intensity','Zone 2-5 cardio minutes & calorie burn'],['Running','🏃','Running','Weekly distance logged','POPULAR WITH RUNNERS'],['Consistency','♡','Workout consistency','Consistent active days logged']];
+  return hdr(S.cfrom||'onboard')+`<h1 style="font-size:28px">Create a league</h1>
+  <div class="lbl"><span>Step 1 · Name your league</span></div>
+  <div class="card"><div class="row"><div class="ico" style="width:64px;height:64px;color:var(--lime);font-size:28px">◍</div><div style="flex:1"><div class="sm mut">LEAGUE NAME</div><input id="lname" value="${c.name}" maxlength="24" style="width:100%;background:var(--card2);border:0;border-radius:10px;padding:10px;color:var(--tx);font:700 18px 'DM Sans';margin-top:4px"></div></div>
+  <div class="sm mut" style="margin:14px 0 8px">CIRCLE</div><div class="row" style="flex-wrap:wrap;gap:6px">${['Family','Friends','Work','Custom'].map(x=>`<button class="pill ${c.circle===x?'on':''}" style="padding:8px 14px;font-size:13px" data-a="circle" data-v="${x}">${x}</button>`).join('')}</div></div>
+  <div class="lbl"><span>Step 2 · Competition metrics</span></div>
+  ${M.map(m=>`<button class="card row dev" style="opacity:1" data-a="metric" data-v="${m[0]}"><div class="ico">${m[1]}</div><div><b>${m[2]}</b> ${m[4]?`<span class="tag lime">${m[4]}</span>`:''}<div class="sm mut">${m[3]}</div></div><span class="check ${c.m[m[0]]?'on':''}">${c.m[m[0]]?'✓':''}</span></button>`).join('')}
+  <div class="card sm mut">✦ If you pick more than one metric, we will create a <b style="color:var(--cy)">normalized score</b> across your combined metrics.</div>
+  ${c.deployed?`<div class="lbl"><span>Step 3 · Invite people</span></div><div class="card"><div class="sm mut">LEAGUE JOIN CODE</div><div class="row"><div class="code">${c.code}</div><button class="sp pill lime" style="flex:none;font-size:12px" data-a="copy">⧉ COPY</button></div><button class="pill" style="margin-top:10px;font-size:13px" data-a="invite">⇪ Invite link</button></div>`:''}
+  <button class="cta" data-a="${c.deployed?'viewleague':'deploy'}">${c.deployed?'Let’s go!':'Create league'}</button>`;
+}
+async function today(){
+  const ls=myLeagues(),ranks=await Promise.all(ls.map(rankOf));
+  const sc=[['Movement','Optimal',91,''],['Sleep','7h 48m',87,'☾'],['Cardio','Zone 3-4',78,'♡'],['Training','14.8 Strain',82,'✕']];
+  const C=2*Math.PI*84;
+  return hdr()+`<h1 style="text-transform:none;font-size:28px;font-weight:500">Good morning, Krishna.</h1>
+  <div class="card row sm"><b style="font-size:14px">${Providers[S.paired].name} synced</b><span class="sp"></span><span class="mut">2M AGO</span></div>
+  <div class="card" style="padding:18px 14px">
+  <div class="ring"><svg viewBox="0 0 190 190"><circle cx="95" cy="95" r="84" fill="none" stroke="#e9e4d9" stroke-width="14"/><circle cx="95" cy="95" r="84" fill="none" stroke="#6f9d82" stroke-width="14" stroke-linecap="round" stroke-dasharray="${C*.82} ${C}" style="filter:drop-shadow(0 2px 6px #6f9d8244)"/></svg><div style="text-align:center"><div class="sm mut">PULSE SCORE</div><div class="big">82</div><div class="chip lime" style="margin-top:6px">↗ +4 VS YDAY</div></div></div>
+  <div class="grid2" style="margin-top:18px">${sc.map(s=>`<div class="tile"><div><div class="sm mut">${s[3]} ${s[0].toUpperCase()}</div><b class="sm">${s[1]}</b></div><span style="font-size:24px;font-weight:700">${s[2]}</span></div>`).join('')}</div></div>
+  <div class="card"><div class="lbl" style="margin-top:0"><span>Today’s updates</span></div>${[['MOS882','↑','You’re up 3 ranks in Mosaic Wellness.'],['ASH441','◷','Ashoka Lads league ends in 2 days. Go all out!'],['AFD720','↓','Dad crossed you in Arora Family. You’re 3,000 steps behind.']].map(u=>`<button class="lrow" style="background:var(--card2)" data-a="league" data-v="${u[0]}"><div class="ico" style="width:36px;height:36px;background:${LEAGUES[u[0]].color};color:#fff;font-size:18px;font-weight:700">${u[1]}</div><div class="sm" style="line-height:1.4;font-weight:500">${u[2]}</div></button>`).join('')}</div>
+  `;
+}
+async function leagues(){
+  const ls=myLeagues();
+  if(S.lv!=='detail'){const ranks=await Promise.all(ls.map(rankOf));return hdr()+`<h1 style="font-size:28px">Leagues</h1><div class="card"><div class="lbl" style="margin-top:0"><span>Your leagues</span><span class="tag lime">ACTIVE</span></div>
+  ${ls.map((l,i)=>`<button class="lrow" style="background:var(--card2)" data-a="league" data-v="${l.id}"><div class="ico" style="width:36px;height:36px;background:${l.color||'#6f9d82'};color:#fff;font-size:20px;font-weight:700;box-shadow:0 4px 12px ${l.color||'#6f9d82'}55">◍</div><div><b class="sm">${l.name}</b><div class="sm mut">${l.circle}</div></div><span class="val" style="font-size:14px;color:var(--tx)"><span class="${i?'':'lime'}">#${ranks[i]}</span> of ${l.size} ›</span></button>`).join('')}</div>
+  <button class="card row" style="width:100%;text-align:left;margin-top:14px" data-a="go" data-v="create"><div class="ico" style="background:#6f9d82;color:#fff;font-size:24px">+</div><div><b style="font-size:16px">Create a new league</b><div class="sm mut">Name it, pick metrics, invite people</div></div><span class="plus">›</span></button>
+  <div class="card"><b style="font-size:16px">Join a league with league code</b><div class="inp" style="margin-top:10px;background:var(--card2)"><span class="mut">123</span><input id="jcode" maxlength="6" placeholder="Enter code" aria-label="League code"><button class="sm-btn" data-a="joinlist">Join</button></div></div>`}if(!LEAGUES[S.league]||LEAGUES[S.league].scores.me===undefined)S.league=ls[0].id;
+  const L=LEAGUES[S.league],rows=await Data.leaderboard(S.league,S.period),pts=L.unit==='PTS';
+  return hdr()+`<button class="sm mut" data-a="go" data-v="leagues" style="margin-bottom:4px">← All leagues</button><h1 style="font-size:28px">${L.name}</h1>
+  <div class="seg"><button class="${S.period==='daily'?'on':''}" data-a="period" data-v="daily">Daily</button><button class="${S.period==='weekly'?'on':''}" data-a="period" data-v="weekly">Weekly Leaderboard</button></div>
+  <div class="card row sm"><span class="mut">COMPETING ${L.metrics.length>1?'METRICS':'METRIC'}</span><span class="sp"></span><span class="tag lime" style="font-size:11px;padding:5px 10px">${L.metrics.join(' + ').toUpperCase()}</span></div>
+  <div class="lbl"><span>Leaderboard standings</span>${pts?'<span>SYNCED LIVE</span>':''}</div>
+  ${rows.map((r,i)=>`<div class="lrow ${r.u.id==='me'?'me':''}"><div class="rk">${i+1}</div>${av(r.u,42)}<div><b>${r.u.id==='me'?'Krishna':r.u.n} ${r.u.id==='me'?'<span class="tag lime">YOU</span>':''}</b><div class="sm mut" style="font-size:11px">● ${r.u.dev}</div>${r.sub&&S.period==='daily'?`<div class="sm mut" style="font-size:11px">${r.sub}</div>`:''}</div><div class="val">${pts?r.v.toFixed(1):r.v.toLocaleString()}<small>${L.unit}</small></div></div>`).join('')}`;
+}
+function battles(){
+  const b=S.bo,inc=S.incoming,opps=['sid','sahil','ananya'];
+  const MET=[['Running Miles'],['Daily Steps'],['Sleep Recovery'],['Consistent Workouts']];
+  return hdr()+`<div class="row"><h1 style="margin:0">1v1 Battles</h1><span class="sp"></span><span class="chip" style="background:var(--gr);color:#fff">Active (${S.active.length})</span></div>
+  
+  ${inc?`<div class="card"><div class="sm" style="color:var(--rd);font-weight:700;margin-bottom:10px">● INCOMING BATTLE REQUEST</div><div class="row">${av(USERS.vikram,56)}<div><b style="font-size:20px">${inc.n}</b> <span class="tag">From ${inc.from}</span><div class="mut sm">Challenged you to a ${inc.ch}</div><div class="sm" style="color:var(--gr)">Stakes: ${inc.stake}</div></div></div><div class="row" style="margin-top:14px"><button class="card sp" style="flex:1;margin:0;text-align:center;font-weight:700" data-a="decline">DECLINE</button><button class="cta g" style="flex:1.4;padding:14px;font-size:14px" data-a="accept">ACCEPT CLASH</button></div></div>`:''}
+  <div class="lbl" style="color:var(--tx);font-size:16px">ACTIVE CLASHES</div>
+  ${S.active.map((a,i)=>{const t=a.me+a.op||1,lead=a.me>=a.op;return `<div class="card"><div class="row sm"><b style="font-size:15px">${a.t}</b><span class="sp"></span><span class="tag">${a.ends}</span></div>
+  <div class="row" style="justify-content:space-between;margin:14px 0">${av(USERS.me,52)}<div><b>Krishna</b><div style="font-size:30px;font-weight:700;color:${lead?'var(--gr)':'var(--tx)'}">${a.me}<small class="sm">${a.u}</small></div></div><span class="ico" style="border-radius:50%">VS</span><div style="text-align:right"><b>${a.opn}</b><div style="font-size:30px;font-weight:700;color:${lead?'var(--tx)':'var(--cy)'}">${a.op}<small class="sm">${a.u}</small></div></div><div class="av" style="width:52px;height:52px;background:${a.opc}">${a.opn[0]}</div></div>
+  <div class="bar"><b style="width:${a.me/t*100}%;${lead?'':'background:#e6e1d6'}"></b><b style="width:${a.op/t*100}%;background:${lead?'#e6e1d6':'var(--cy)'}"></b></div>
+  <div class="row sm mut" style="margin-top:12px">${i===0?`<button class="tag" style="padding:10px 12px" data-a="poke" data-v="${a.opn}">Poke ${a.opn.split(' ')[0]}</button>`:`${lead?'You lead':a.opn+' leads'} by ${Math.abs(a.me-a.op).toFixed(1)}${a.u}`}</div></div>`}).join('')}
+  <div class="card"><div class="lbl" style="margin-top:0;color:var(--tx);font-size:16px"><span>INITIATE 1V1 BATTLE</span></div>
+  <div class="lbl"><span>Step 1 · Choose opponent</span></div><div class="row" style="gap:8px">${opps.map(o=>`<button class="card" style="flex:1;margin:0;text-align:center;${b.opp===o?'border-color:var(--gr)':''}" data-a="opp" data-v="${o}">${av(USERS[o],44).replace('class="av"','class="av" style="margin:0 auto 6px;background:'+USERS[o].c+'"')}<b class="sm">${USERS[o].n.split(' ')[0]}</b><div class="mut" style="font-size:10px">${USERS[o].dev.split(' ').slice(0,2).join(' ')}</div></button>`).join('')}</div>
+  <div class="lbl"><span>Step 2 · Select metric</span></div><div class="grid2">${MET.map(m=>`<button class="card row" style="margin:0;text-align:left;${b.metric===m[0]?'background:var(--gr);color:#fff':''}" data-a="metric2" data-v="${m[0]}"><b class="sm">${m[0]}</b></button>`).join('')}</div>
+  <div class="lbl"><span>Step 3 · Battle duration</span></div><div class="grid2" style="grid-template-columns:repeat(4,1fr);gap:6px">${['24 Hours','3 Days','7 Days','Custom'].map(d=>`<button class="card" style="margin:0;padding:10px 4px;text-align:center;font-weight:700;font-size:12px;${b.dur===d?'background:var(--gr);color:#fff':''}" data-a="dur" data-v="${d}">${d}</button>`).join('')}</div>
+  <div class="card row" style="margin-top:12px"><div class="sm"><b>Stakes</b><div class="mut">${b.stake}</div></div><button class="tag" style="margin-left:auto;padding:8px 12px" data-a="stake">Change</button></div>
+  <button class="cta g" data-a="send">Send battle challenge</button></div>`;
+}
+/* ---------- RENDER & EVENTS ---------- */
+const TABS=[['today','⌂','Today'],['leagues','▥','Leagues'],['battles','✕','Battles']];
+async function render(){
+  const f={landing,onboard,create,today,leagues,battles}[S.screen];
+  const st=view.scrollTop;view.innerHTML=await f();view.scrollTop=st;
+  $('#nav').style.display=TABS.some(t=>t[0]===S.screen)?'flex':'none';
+  $('#nav').innerHTML=TABS.map(t=>`<button class="${t[0]===S.screen?'on':''}" data-a="go" data-v="${t[0]}"><span>${t[1]}</span>${t[2]}</button>`).join('');
+}
+const go=(v)=>{if(v==='create'){S.cfrom=S.screen;S.cl.deployed=false;S.cl.code=randCode()}if(v==='leagues')S.lv='list';S.screen=v;view.scrollTop=0;render()};
+function randCode(){const c='ABCDEFGHJKLMNPQRSTUVWXYZ';return c[Math.random()*24|0]+c[Math.random()*24|0]+c[Math.random()*24|0]+(100+Math.random()*900|0)}
+document.addEventListener('input',e=>{if(e.target.id==='code')S.code=e.target.value.toUpperCase();if(e.target.id==='lname')S.cl.name=e.target.value});
+document.addEventListener('click',async e=>{
+  const el=e.target.closest('[data-a]');if(!el)return;const a=el.dataset.a,v=el.dataset.v;
+  switch(a){
+    case'go':return go(v);
+    case'pair':S.paired=v;await Providers[v].connect();toast(Providers[v].name+' paired');break;
+    case'tab':S.tab=v;break;
+    case'join':{const l=LEAGUES[S.code.toUpperCase()];if(!l){S.joined=false;toast('No league with that code');break}
+      if(l.scores.me===undefined){l.scores.me=0;l.size++;} S.joined=true;S.league=l.id;toast('Joined '+l.name);break}
+    case'enter':if(!S.joined){toast('Join a league first');return}return go('today');
+    case'circle':S.cl.circle=v;break;
+    case'metric':S.cl.m[v]=S.cl.m[v]?0:1;break;
+    case'copy':try{await navigator.clipboard.writeText(S.cl.code)}catch(_){}toast('Code '+S.cl.code+' copied');return;
+    case'invite':toast('Invite link copied');return;
+    case'deploy':{const sel=Object.keys(S.cl.m).filter(k=>S.cl.m[k]);if(!sel.length){toast('Pick at least one metric');return}
+      const pool=['arjun','riya','kabir'],sc={me:+(70+Math.random()*25).toFixed(1)};pool.forEach(p=>sc[p]=+(55+Math.random()*40).toFixed(1));
+      LEAGUES[S.cl.code]={id:S.cl.code,color:'#a99bd0',name:S.cl.name,circle:S.cl.circle+' Circle',metrics:sel,unit:'PTS',scores:sc,size:4};
+      S.league=S.cl.code;S.joined=true;S.code=S.cl.code;S.cl.deployed=true;toast('League deployed!');break}
+    case'joinlist':{const c2=($('#jcode').value||'').trim().toUpperCase(),l=LEAGUES[c2];if(!l){toast('No league with that code');return}
+      if(l.scores.me===undefined){l.scores.me=0;l.size++;toast('Joined '+l.name)}else toast('You’re already in '+l.name);
+      S.league=l.id;S.lv='detail';S.screen='leagues';break}
+    case'viewleague':S.lv='detail';S.screen='leagues';break;
+    case'league':S.league=v;S.lv='detail';S.screen='leagues';break;
+    case'period':S.period=v;break;
+    case'decline':S.incoming=null;toast('Challenge declined');break;
+    case'accept':S.active.unshift({t:S.incoming.ch,ends:'Ends in 23h 59m',me:0,op:0,u:'steps',opn:'Vikram M.',opd:'Apple Watch 9',opc:'#e9c9a3'});S.incoming=null;toast('Clash accepted!');break;
+    case'react':toast(v+' sent');return;
+    case'poke':toast('Poked '+v);return;
+    case'opp':S.bo.opp=v;break;case'metric2':S.bo.metric=v;break;case'dur':S.bo.dur=v;break;
+    case'stake':{const o=['Loser does 50 push-ups','Loser buys morning coffee','Loser owes a meal','Loser puts up an IG story','Loser buys post-run smoothies'];S.bo.stake=o[(o.indexOf(S.bo.stake)+1)%o.length];break}
+    case'send':{const o=USERS[S.bo.opp];S.active.push({t:S.bo.dur+' '+S.bo.metric+' Duel',ends:'Pending · '+S.bo.dur,me:0,op:0,u:'',opn:o.n.split(' ')[0],opd:o.dev,opc:o.c});S.rec;toast('Challenge sent to '+o.n.split(' ')[0]);break}
+  }
+  render();
+});
+render();
+</script></body></html>
